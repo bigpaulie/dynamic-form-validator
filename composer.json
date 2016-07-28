@@ -1,0 +1,17 @@
+{
+    "name": "bigpaulie/dynamic-form",
+    "description": "PHP Dynamic form validation",
+    "type": "Library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Paul P",
+            "email": "bigpaulie25ro@yahoo.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload":{
+        "psr-4": {"App\\":"app/"}
+    }
+}
