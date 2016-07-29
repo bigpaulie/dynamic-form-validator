@@ -1,27 +1,61 @@
 <?php
 
-namespace bigpaulie\Form;
+namespace bigpaulie\form;
+
+use bigpaulie\form\factories\RuleFactory;
 
 class Validator {
 
+    /**
+     * Validation rules
+     * @var array $_rules
+     */
     private $_rules = [];
+
+    /**
+     * Validation errors
+     * @var array $_errors
+     */
     private $_errors = [];
+
+    /**
+     * HTTP Request data
+     * @var null $_request
+     */
     private $_request = null;
 
+    /**
+     * Set validation rules
+     * @param $rules
+     * @return $this
+     */
     public function setRules($rules) {
         $this->_rules = $rules;
         return $this;
     }
 
+    /**
+     * Set request data
+     * @param $request
+     * @return $this
+     */
     public function setRequest($request) {
         $this->_request = $request;
         return $this;
     }
 
+    /**
+     * Get validation errors
+     * @return array
+     */
     public function getErrors() {
         return $this->_errors;
     }
 
+    /**
+     * Run the validation
+     * @return bool
+     */
     public function run() {
         
         foreach ( $this->_request as $key => $val ) {
@@ -35,12 +69,14 @@ class Validator {
                  * Check field name 
                  */
                 if ( preg_match($rule , $key) ) {
-                   /**
-                    * Check field value
-                    */
-                    if ( !preg_match($value, $val) ) {
+
+                    $factory = new RuleFactory($value);
+                    $validator = $factory->make();
+
+                    if ( !$validator->run($val) ) {
                         $this->_errors[] = sprintf('The field %s is invalid', $key);
                     }
+
                 }
             }
 
