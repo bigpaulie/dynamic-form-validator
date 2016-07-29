@@ -104,4 +104,32 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase {
         $this->assertFalse($this->validator->run());
     }
 
+    /**
+     * This test should validate dates
+     */
+    public function testShouldValidateDate() {
+        $data = [
+            'date_1' => '29/07/2016',
+            'date_2' => '07/29/2016',
+            'date_3' => '7/29/2016',
+            'date_4' => '7/1/2016',
+            'date_5' => '7/1/16',
+        ];
+
+        $rule = ['/date_([0-9]+)/i' => 'date'];
+        $this->validator->setRequest($data)->setRules($rule);
+        $this->assertTrue($this->validator->run());
+    }
+
+    /**
+     * This test should invalidate dates
+     */
+    public function testShouldInvalidateDate() {
+        $data = ['date_1' => '2016/07/29'];
+        $rule = ['/date_([0-9]+)/i' => 'date'];
+
+        $this->validator->setRequest($data)->setRules($rule);
+        $this->assertFalse($this->validator->run());
+    }
+
 }

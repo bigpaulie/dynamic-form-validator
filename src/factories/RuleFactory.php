@@ -3,6 +3,7 @@
 namespace bigpaulie\form\factories;
 
 use bigpaulie\form\exceptions\InvalidRuleException;
+use bigpaulie\form\rules\DateRule;
 use bigpaulie\form\rules\EmailRule;
 use bigpaulie\form\rules\Rule;
 use bigpaulie\form\rules\StringRule;
@@ -20,6 +21,7 @@ class RuleFactory
     private $rules = [
         'string' => StringRule::class,
         'email'  => EmailRule::class,
+        'date'   => DateRule::class,
     ];
 
     private $type = null;
