@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Library\FormValidator;
+namespace bigpaulie\Form;
 
 class Validator {
 
@@ -16,6 +16,10 @@ class Validator {
     public function setRequest($request) {
         $this->_request = $request;
         return $this;
+    }
+
+    public function getErrors() {
+        return $this->_errors;
     }
 
     public function run() {

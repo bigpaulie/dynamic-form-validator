@@ -2,7 +2,7 @@
 
 require_once 'vendor/autoload.php';
 
-use App\Library\FormValidator\Validator;
+use bigpaulie\Form\Validator;
 
 $rules = [
     '/name_([0-9]+)/i' => '/(.*)/i',
