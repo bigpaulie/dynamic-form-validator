@@ -7,7 +7,7 @@ It was written with my own needs in mind, it may not be the best library but it 
 Install the package via composer using :
 
 ```
-composer require --prefer-dist bipaulie/form
+composer require --prefer-dist bipaulie/dynamic-form-validation
 ```
 
 ### Usage
