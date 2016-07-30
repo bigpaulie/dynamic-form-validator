@@ -132,4 +132,64 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase {
         $this->assertFalse($this->validator->run());
     }
 
+    /**
+     * This test should validate numerical values
+     * such as integers and floats
+     */
+    public function testShouldValidateNumericalValues() {
+        $data = [
+            'number_1' => '10',
+            'number_2' => '3.5',
+        ];
+
+        $rule = ['/number_([0-9]+)/i' => 'numerical'];
+        $this->validator->setRequest($data)->setRules($rule);
+        $this->assertTrue($this->validator->run());
+    }
+
+    /**
+     * This test should invalidate non-numerical values
+     */
+    public function testShouldInvalidateNonNumericalValues() {
+        $data = ['number_1' => 'test'];
+
+        $rule = ['/number_([0-9]+)/i' => 'numerical'];
+        $this->validator->setRequest($data)->setRules($rule);
+        $this->assertFalse($this->validator->run());
+    }
+
+    /**
+     * This test should validate passwords
+     * containing :
+     * At least one uppercase letter
+     * At least one number
+     * At least one special character
+     * Is at least 8 characters long
+     */
+    public function testShouldValidatePassword() {
+        $data = [
+            'password_1' => 'SomeCrazyPass0rd@123',
+            'password_2' => 'anoth3rCrazyPassw0rd#321'
+        ];
+
+        $rule = ['/password_([0-9]+)/i' => 'password'];
+        $this->validator->setRequest($data)->setRules($rule);
+        $this->assertTrue($this->validator->run());
+    }
+
+    /**
+     * This test should invalidate any password
+     * that doesn't comply with the requirements
+     * mentioned above
+     */
+    public function testShouldInvalidatePassword() {
+        $data = [
+            'password_1' => 'password',
+        ];
+
+        $rule = ['/password_([0-9]+)/i' => 'password'];
+        $this->validator->setRequest($data)->setRules($rule);
+        $this->assertFalse($this->validator->run());
+    }
+
 }

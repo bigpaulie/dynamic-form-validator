@@ -48,6 +48,16 @@ The "date" filter validates dates of the follwing formats :
 #### Email validation
 The "email" filter validates email addresses 
 
+#### Numeric validation
+The "numerical" filter validates numerical values such as integers and floats
+
+#### Password validation
+The "password" filter validates passwords of the following format:
+- Has at least one uppercase letter
+- Has at least one number
+- Has at least one special character (!,@,#,$)
+- Is at least 8 characters long
+
 #### Examples
 Checkout the examples directory form some examples on how to use the validator.
 
