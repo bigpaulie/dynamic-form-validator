@@ -28,15 +28,25 @@ class RuleFactory
         'password'  => PasswordRule::class,
     ];
 
+    /**
+     * Validator type
+     * @var null|string $type
+     */
     private $type = null;
 
     /**
      * RuleFactory constructor.
+     */
+    public function __construct() {}
+
+    /**
+     * Make Validator
      * @param $type
+     * @return mixed
      * @throws InvalidRuleException
      */
-    public function __construct($type)
-    {
+    public function make($type) {
+
         /**
          * Check if the rule exists
          * otherwise throw an InvalidRuleException
@@ -46,13 +56,7 @@ class RuleFactory
         } else {
             $this->type = $type;
         }
-    }
 
-    /**
-     * Make validator
-     * @return Rule
-     */
-    public function make() {
         return new $this->rules[$this->type]();
     }
 }
