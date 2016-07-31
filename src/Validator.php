@@ -35,6 +35,21 @@ class Validator {
     }
 
     /**
+     * RuleFactory
+     * @var null|RuleFactory
+     */
+    private $factory = null;
+
+    /**
+     * Validator constructor.
+     * @param RuleFactory $factory
+     */
+    public function __construct(RuleFactory $factory)
+    {
+        $this->factory = $factory;
+    }
+
+    /**
      * Set request data
      * @param $request
      * @return $this
@@ -70,8 +85,8 @@ class Validator {
                  */
                 if ( preg_match($rule , $key) ) {
 
-                    $factory = new RuleFactory($value);
-                    $validator = $factory->make();
+//                    $factory = new RuleFactory($value);
+                    $validator = $this->factory->make($value);
 
                     if ( !$validator->run($val) ) {
                         $this->_errors[] = sprintf('The field %s is invalid', $key);

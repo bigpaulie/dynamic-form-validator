@@ -1,25 +1,15 @@
 <?php
 
 use bigpaulie\form\Validator;
+use bigpaulie\form\factories\RuleFactory;
 
 class ValidatorTest extends \PHPUnit_Framework_TestCase {
 
     public $validator;
 
     public function setUp() {
-        $this->validator = new Validator();
-    }
-
-    /**
-     * Throw an exception on an invalid validator
-     * @expectedException \bigpaulie\form\exceptions\InvalidRuleException
-     */
-    public function testShouldThrowInvalidRuleException() {
-        $data = ['name_1' => 'just a name'];
-        $rule = ['/name_([0-9]+)/i' => 'invalid_validator'];
-
-        $this->validator->setRequest($data)->setRules($rule);
-        $this->validator->run();
+        $factory = new RuleFactory();
+        $this->validator = new Validator($factory);
     }
 
     /**
