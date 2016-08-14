@@ -1,6 +1,6 @@
 test:
     php_unit:
         config:
-            - "phpunit.xml"
+            - "phpunit-phpci.xml"
         directory:
             - "tests/"
